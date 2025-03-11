@@ -1,7 +1,5 @@
 package org.example.springapp.repository;
 
-import org.example.springapp.model.Attraction;
-import org.example.springapp.model.Service;
 import org.example.springapp.model.TicketInfo;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.query.Param;
