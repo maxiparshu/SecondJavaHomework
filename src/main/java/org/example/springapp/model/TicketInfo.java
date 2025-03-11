@@ -6,6 +6,9 @@ import lombok.Setter;
 
 import java.math.BigDecimal;
 
+/**
+ * Сущность, представляющая информацию о билете для достопримечательности.
+ */
 @Setter
 @Getter
 @Entity
@@ -25,6 +28,9 @@ public class TicketInfo {
     @Column(name = "availability")
     private Boolean availability;
 
+    /**
+     * Связь с достопримечательностью, для которой предоставляется информация о билете.
+     **/
     @OneToOne
     @JoinColumn(name = "attraction_id")
     private Attraction attraction;

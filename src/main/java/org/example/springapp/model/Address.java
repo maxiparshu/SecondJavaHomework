@@ -4,6 +4,11 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.List;
+
+/**
+ * Сущность, представляющая информацию о адресе.
+ */
 @Setter
 @Getter
 @Entity
@@ -29,4 +34,6 @@ public class Address {
     @Column(name= "longitude")
     private Double longitude;
 
+    @OneToMany(mappedBy = "address")
+    private List<Attraction> attraction;
 }

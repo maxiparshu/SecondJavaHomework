@@ -27,8 +27,9 @@ public class Attraction {
     @Column(name = "attraction_type")
     private AttractionType attractionType;
 
-    @ManyToOne
-    @JoinColumn(name = "address_id", nullable = false)
+    @ManyToOne(fetch = FetchType.LAZY,
+            cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @JoinColumn(name = "address_id")
     private Address address;
 
     @OneToOne(mappedBy = "attraction", cascade = CascadeType.ALL, orphanRemoval = true)
