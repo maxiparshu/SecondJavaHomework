@@ -1,13 +1,11 @@
 package org.example.springapp.dto;
 
 import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
 import java.util.List;
 
-@Getter
-@Setter
+@Data
 @Builder
 public class AddressDTO {
     private Long id;
@@ -17,5 +15,5 @@ public class AddressDTO {
     private String city;
     private Double latitude;
     private Double longitude;
-    private List<AttractionDTO> attraction;
+    private List<Long> attractionID;
 }

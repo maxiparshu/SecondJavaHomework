@@ -1,14 +1,12 @@
 package org.example.springapp.dto;
 
 import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 import org.example.springapp.utils.enums.AttractionType;
 
 import java.util.List;
 
-@Getter
-@Setter
+@Data
 @Builder
 public class AttractionDTO {
     private Long id;
@@ -16,6 +14,6 @@ public class AttractionDTO {
     private String description;
     private AttractionType attractionType;
     private AddressDTO address;
-    private TicketInfoDTO ticketInfo;
-    private List<ServiceDTO> services;
+    private Long ticketInfoID;
+    private List<Long> servicesID;
 }

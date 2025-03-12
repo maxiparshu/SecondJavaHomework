@@ -17,5 +17,5 @@ public interface ServiceRepository extends JpaRepository<Service, Long> {
      * @return  {@link Optional} для  {@link Service}
      */
     Optional<Service> getServiceById(@Param("id") Long id);
-
+    Optional<Service> getServiceByName(@Param("name") String name);
 }

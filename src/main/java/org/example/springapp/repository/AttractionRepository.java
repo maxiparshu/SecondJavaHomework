@@ -16,4 +16,5 @@ public interface AttractionRepository extends JpaRepository<Attraction, Long> {
      * @return  {@link Optional} для  {@link Attraction}
      */
     Optional<Attraction> getAttractionById(@Param("id") Long id);
+    Optional<Attraction> getAttractionByName(@Param("name") String name);
 }

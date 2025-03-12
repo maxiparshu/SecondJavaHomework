@@ -14,7 +14,8 @@ import java.util.Optional;
 public interface TicketInfoRepository extends JpaRepository<TicketInfo, Long> {
     /**
      * Метод для получения {@link TicketInfo} по айди
-     * @return  {@link Optional} для  {@link TicketInfo}
+     *
+     * @return {@link Optional} для  {@link TicketInfo}
      */
     Optional<TicketInfo> getTicketInfoById(@Param("id") Long id);
 

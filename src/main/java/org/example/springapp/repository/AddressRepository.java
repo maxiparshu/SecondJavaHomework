@@ -17,4 +17,7 @@ public interface AddressRepository extends JpaRepository<Address, Long> {
      * @return  {@link Optional} для  {@link Address}
      */
     Optional<Address> getAddressById(@Param("id") Long id);
+    Optional<Address> getAddressByCity(@Param("city") String city);
+    Optional<Address> getAddressByRegion(@Param("region") String region);
+
 }
