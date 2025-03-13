@@ -1,6 +1,6 @@
 package org.example.springapp.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.*;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -15,6 +15,11 @@ import java.util.List;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+@JsonIdentityInfo(
+        generator = ObjectIdGenerators.PropertyGenerator.class,
+        property = "id"
+)
 @Table(name = "address", schema = "tourism")
 public class Address {
 
@@ -46,7 +51,6 @@ public class Address {
      * Связь "один ко многим" с сущностью Attraction.
      */
     @OneToMany(mappedBy = "address")
-    @JsonBackReference
     private List<Attraction> attraction;
 
 }

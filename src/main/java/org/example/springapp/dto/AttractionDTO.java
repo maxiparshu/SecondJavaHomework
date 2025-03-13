@@ -1,5 +1,6 @@
 package org.example.springapp.dto;
 
+import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Builder;
@@ -22,6 +23,8 @@ public class AttractionDTO {
     @Size(max = 255, message = "Description cannot exceed 255 characters")
     private String description;
     private String attractionType;
+    @NotNull(message = "Address ID cannot be null")
+    @Min(value = 1, message = "Address ID must be at least 1")
     private Long addressID;
     private Long ticketInfoID;
     private List<Long> servicesID;

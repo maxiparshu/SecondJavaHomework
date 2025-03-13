@@ -14,11 +14,9 @@ import java.util.List;
 public class AddressDTO {
     private Long id;
 
-    @NotNull(message = "Building number cannot be null")
     @Min(value = 1, message = "Building number must be at least 1")
     private Integer building;
 
-    @NotBlank(message = "Street cannot be blank")
     @Size(max = 100, message = "Street name must be less than 100 characters")
     private String street;
     @NotBlank(message = "Region cannot be blank")
