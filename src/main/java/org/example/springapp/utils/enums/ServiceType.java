@@ -1,6 +1,9 @@
 package org.example.springapp.utils.enums;
 
 import lombok.Getter;
+
+import java.util.stream.Stream;
+
 /**
  * Перечисление, представляющее типы усдуг.
  * <p>
@@ -23,5 +26,10 @@ public enum ServiceType {
     ServiceType(String displayName) {
         this.displayName = displayName;
     }
-
+    public static ServiceType fromDisplayName(String displayName) {
+        return Stream.of(values())
+                .filter(type -> type.getDisplayName().equalsIgnoreCase(displayName))
+                .findAny()
+                .orElseThrow(() -> new IllegalArgumentException("Unknown display name: " + displayName));
+    }
 }

@@ -1,7 +1,6 @@
 package org.example.springapp.dto;
 import lombok.Builder;
 import lombok.Data;
-import org.example.springapp.utils.enums.ServiceType;
 
 import java.util.List;
 
@@ -11,6 +10,6 @@ public class ServiceDTO {
     private Long id;
     private String name;
     private String description;
-    private ServiceType serviceType;
+    private String serviceType;
     private List<Long> attractionsID;
 }

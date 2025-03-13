@@ -2,6 +2,8 @@ package org.example.springapp.utils.enums;
 
 import lombok.Getter;
 
+import java.util.stream.Stream;
+
 /**
  * Перечисление, представляющее типы достопримечательностей.
  * <p>
@@ -15,7 +17,8 @@ public enum AttractionType{
     PARK("Парк"),
     MUSEUM("Музей"),
     ARCHAEOLOGICAL_SITE("Археологический объект"),
-    RESERVE("Заповедник");
+    RESERVE("Заповедник"),
+    MONUMENT("Монумент");
 
     private final String displayName;
     /**
@@ -27,4 +30,11 @@ public enum AttractionType{
         this.displayName = displayName;
     }
 
+    public static AttractionType fromDisplayName(String displayName) {
+        return Stream.of(values())
+                .filter(type -> type.getDisplayName().equalsIgnoreCase(displayName))
+                .findAny()
+                .orElseThrow(() -> new IllegalArgumentException("Unknown display name: " + displayName));
+    }
 }
+

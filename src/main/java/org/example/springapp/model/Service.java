@@ -1,19 +1,21 @@
 package org.example.springapp.model;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 import org.example.springapp.utils.enums.ServiceType;
 
 import java.util.List;
 
 @Setter
 @Getter
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = "service", schema = "tourism")
 public class Service {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
 
@@ -27,7 +29,7 @@ public class Service {
     @Column(name = "service_type")
     private ServiceType serviceType;
 
-    @ManyToMany(mappedBy = "service")
+    @ManyToMany(mappedBy = "services")
     private List<Attraction> attractions;
 
 }
