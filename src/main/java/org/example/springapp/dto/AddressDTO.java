@@ -6,6 +6,9 @@ import lombok.Data;
 
 import java.util.List;
 
+/**
+ * DTO для передачи информации об адресе.
+ */
 @Data
 @Builder
 public class AddressDTO {

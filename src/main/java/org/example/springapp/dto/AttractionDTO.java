@@ -7,6 +7,9 @@ import lombok.Data;
 
 import java.util.List;
 
+/**
+ * DTO для передачи информации об аттракционах.
+ */
 @Data
 @Builder
 public class AttractionDTO {

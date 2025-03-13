@@ -4,6 +4,9 @@ import org.example.springapp.dto.TicketInfoDTO;
 import org.example.springapp.model.TicketInfo;
 import org.springframework.stereotype.Component;
 
+/**
+ * Класс для преобразования {@link TicketInfo} и {@link TicketInfoDTO}
+ */
 @Component
 public class TicketInfoMapper implements Mapper<TicketInfo, TicketInfoDTO> {
     @Override

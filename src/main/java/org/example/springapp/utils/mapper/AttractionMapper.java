@@ -5,6 +5,9 @@ import org.example.springapp.model.Attraction;
 import org.example.springapp.utils.enums.AttractionType;
 import org.springframework.stereotype.Component;
 
+/**
+ * Класс для преобразования
+ */
 @Component
 public class AttractionMapper implements Mapper<Attraction, AttractionDTO> {
     public Attraction toEntity(AttractionDTO attraction) {

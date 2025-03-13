@@ -5,6 +5,9 @@ import org.example.springapp.model.Service;
 import org.example.springapp.utils.enums.ServiceType;
 import org.springframework.stereotype.Component;
 
+/**
+ * Класс для преобразования {@link Service} и {@link ServiceDTO}
+ */
 @Component
 public class ServiceMapper implements Mapper<Service, ServiceDTO> {
     @Override

@@ -1,5 +1,6 @@
 package org.example.springapp.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -35,5 +36,6 @@ public class TicketInfo {
      **/
     @OneToOne
     @JoinColumn(name = "attraction_id")
+    @JsonBackReference
     private Attraction attraction;
 }

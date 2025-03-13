@@ -4,8 +4,11 @@ import org.example.springapp.dto.AddressDTO;
 import org.example.springapp.model.Address;
 import org.springframework.stereotype.Component;
 
+/**
+ * Класс для преобразования {@link Address} и {@link AddressDTO}
+ */
 @Component
-public class AddressMapper implements Mapper<Address, AddressDTO>{
+public class AddressMapper implements Mapper<Address, AddressDTO> {
     @Override
     public Address toEntity(AddressDTO dto) {
         return Address.builder()
