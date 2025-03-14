@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 /**
- * Сервисный класс для выполнения CRUD операций с сущностью Attraction.
+ * Сервисный класс для выполнения CRUD операций с сущностью {@link Attraction}.
  */
 @Service
 @AllArgsConstructor
@@ -19,10 +19,10 @@ public class AttractionService implements CRUDService<Attraction> {
     private final AttractionRepository repository;
 
     /**
-     * Создает новый объект Attraction и сохраняет его в базе данных.
+     * Создает новый объект {@link Attraction} и сохраняет его в базе данных.
      *
-     * @param entity объект Attraction, который нужно сохранить
-     * @return сохранённый объект Attraction
+     * @param entity объект {@link Attraction}, который нужно сохранить
+     * @return сохранённый объект {@link Attraction}
      */
     @Override
     public Attraction create(Attraction entity) {
@@ -30,9 +30,9 @@ public class AttractionService implements CRUDService<Attraction> {
     }
 
     /**
-     * Получает список всех объектов Attraction из базы данных.
+     * Получает список всех объектов {@link Attraction} из базы данных.
      *
-     * @return список всех объектов Attraction
+     * @return список всех объектов {@link Attraction}
      */
     @Override
     public List<Attraction> read() {
@@ -40,21 +40,22 @@ public class AttractionService implements CRUDService<Attraction> {
     }
 
     /**
-     * Ищет и возвращает объект Attraction по его ID.
+     * Ищет и возвращает объект {@link Attraction} по его ID.
      *
-     * @param id уникальный идентификатор объекта Attraction
-     * @return объект Attraction с заданным ID
+     * @param id уникальный идентификатор объекта {@link Attraction}
+     * @return объект {@link Attraction} с заданным ID
      * @throws ResourceNotFoundException если объект с таким ID не найден
      */
     @Override
     public Attraction getByID(Long id) throws ResourceNotFoundException {
-        return repository.getAttractionById(id).orElseThrow(() -> new ResourceNotFoundException("Attraction with this id doesn't exist"));
+        return repository.getAttractionById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Attraction with this id doesn't exist"));
     }
 
     /**
-     * Обновляет существующий объект Attraction в базе данных.
+     * Обновляет существующий объект {@link Attraction} в базе данных.
      *
-     * @param entity обновленный объект Attraction
+     * @param entity обновлённый объект {@link Attraction}
      * @throws ResourceNotFoundException если объект с таким ID не найден
      */
     @Override
@@ -66,9 +67,9 @@ public class AttractionService implements CRUDService<Attraction> {
     }
 
     /**
-     * Удаляет объект Attraction из базы данных по его ID.
+     * Удаляет объект {@link Attraction} из базы данных по его ID.
      *
-     * @param id уникальный идентификатор объекта Attraction
+     * @param id уникальный идентификатор объекта {@link Attraction}
      * @throws ResourceNotFoundException если объект с таким ID не найден
      */
     @Override
@@ -78,18 +79,44 @@ public class AttractionService implements CRUDService<Attraction> {
         }
         repository.deleteById(id);
     }
-    public List<Attraction> findByNameContaining(String name){
+
+    /**
+     * Находит достопримечательности по фрагменту названия.
+     *
+     * @param name фрагмент названия достопримечательности
+     * @return список достопримечательностей, чьи названия содержат указанный фрагмент, игнорируя регистр
+     */
+    public List<Attraction> findByNameContaining(String name) {
         return repository.findByNameContainingIgnoreCase(name);
     }
+
+    /**
+     * Находит достопримечательности по городу.
+     *
+     * @param city город, в котором расположены достопримечательности
+     * @return список достопримечательностей, расположенных в указанном городе
+     */
     public List<Attraction> searchAttractionsByCity(String city) {
         return repository.findByAddressCity(city);
     }
 
-    // Поиск по региону
+    /**
+     * Находит достопримечательности по региону.
+     *
+     * @param region регион, в котором расположены достопримечательности
+     * @return список достопримечательностей, расположенных в указанном регионе
+     */
     public List<Attraction> searchAttractionsByRegion(String region) {
         return repository.findByAddressRegion(region);
     }
+
+    /**
+     * Находит достопримечательности по типу услуги.
+     *
+     * @param serviceName тип услуги, предоставляемой достопримечательностью
+     * @return список достопримечательностей, предоставляющих указанную услугу
+     */
     public List<Attraction> searchAttractionsByService(ServiceType serviceName) {
-        return repository.findByServicesServiceType (serviceName);
+        return repository.findByServicesServiceType(serviceName);
     }
 }

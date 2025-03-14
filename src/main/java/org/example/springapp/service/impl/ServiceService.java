@@ -9,7 +9,7 @@ import org.example.springapp.service.CRUDService;
 import java.util.List;
 
 /**
- * Сервисный класс для выполнения CRUD операций с сущностью Service.
+ * Сервисный класс для выполнения CRUD операций с сущностью {@link Service}.
  */
 @AllArgsConstructor
 @org.springframework.stereotype.Service

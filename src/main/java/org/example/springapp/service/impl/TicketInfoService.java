@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 /**
- * Сервисный класс для выполнения CRUD операций с сущностью TicketInfo.
+ * Сервисный класс для выполнения CRUD операций с сущностью {@link TicketInfo}.
  */
 @Service
 @AllArgsConstructor
