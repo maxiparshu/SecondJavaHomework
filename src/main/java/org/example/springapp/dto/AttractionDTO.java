@@ -2,6 +2,7 @@ package org.example.springapp.dto;
 
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
 import jakarta.validation.constraints.Size;
 import lombok.Builder;
 import lombok.Data;
@@ -26,6 +27,7 @@ public class AttractionDTO {
     @NotNull(message = "Address ID cannot be null")
     @Min(value = 1, message = "Address ID must be at least 1")
     private Long addressID;
+    @Min(value = 1, message = "Ticket ID must be at least 1")
     private Long ticketInfoID;
-    private List<Long> servicesID;
+    private List<@Positive(message = "Service ID must be a positive number")Long> servicesID;
 }

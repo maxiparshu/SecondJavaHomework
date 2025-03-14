@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
  * Класс для преобразования {@link Address} и {@link AddressDTO}
  */
 @Component
-public class AddressMapper implements Mapper<Address, AddressDTO> {
+public class AddressMapper extends EntityMapper<Address, AddressDTO> {
     @Override
     public Address toEntity(AddressDTO dto) {
         return Address.builder()

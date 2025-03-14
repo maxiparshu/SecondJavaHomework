@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
  * Класс для преобразования
  */
 @Component
-public class AttractionMapper implements Mapper<Attraction, AttractionDTO> {
+public class AttractionMapper extends EntityMapper<Attraction, AttractionDTO> {
     public Attraction toEntity(AttractionDTO attraction) {
         return Attraction.builder()
                 .id(attraction.getId())

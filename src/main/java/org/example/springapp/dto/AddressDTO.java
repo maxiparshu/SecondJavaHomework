@@ -33,5 +33,5 @@ public class AddressDTO {
     @DecimalMin(value = "-180.0", message = "Longitude must be greater than or equal to -180")
     @DecimalMax(value = "180.0", message = "Longitude must be less than or equal to 180")
     private Double longitude;
-    private List<Long> attractionID;
+    private List<@Positive(message = "Attraction ID must be a positive number") Long> attractionID;
 }

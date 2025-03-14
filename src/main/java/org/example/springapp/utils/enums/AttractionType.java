@@ -18,6 +18,7 @@ public enum AttractionType{
     MUSEUM("Музей"),
     ARCHAEOLOGICAL_SITE("Археологический объект"),
     RESERVE("Заповедник"),
+    TEMPLE("Храм"),
     MONUMENT("Монумент");
 
     private final String displayName;
