@@ -9,6 +9,7 @@ import org.example.springapp.service.impl.AddressService;
 import org.example.springapp.service.impl.AttractionService;
 import org.example.springapp.service.impl.ServiceService;
 import org.example.springapp.service.impl.TicketInfoService;
+import org.example.springapp.utils.enums.ServiceType;
 import org.example.springapp.utils.mapper.AttractionMapper;
 import org.example.springapp.utils.mapper.EntityByIDMapper;
 import org.springframework.http.HttpStatus;
@@ -86,5 +87,9 @@ public class AttractionController {
     @GetMapping("/search-by-region/{region}")
     public List<Attraction> searchAttractionsByRegion(@PathVariable(name = "region") String region) {
         return attractionService.searchAttractionsByRegion(region);
+    }
+    @GetMapping("/search-by-service-type/{type}")
+    public List<Attraction> searchAttractionsByService(@PathVariable(name = "type") String serviceName) {
+        return attractionService.searchAttractionsByService(ServiceType.fromDisplayName(serviceName));
     }
 }

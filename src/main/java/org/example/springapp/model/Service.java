@@ -1,6 +1,6 @@
 package org.example.springapp.model;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.*;
 import org.example.springapp.utils.enums.ServiceType;
@@ -39,7 +39,7 @@ public class Service {
      * Связь "многие ко многим", управляемая со стороны сущности Attraction.
      */
     @ManyToMany(mappedBy = "services")
-    @JsonManagedReference
+    @JsonBackReference
     private List<Attraction> attractions;
 
 }

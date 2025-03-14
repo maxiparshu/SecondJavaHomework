@@ -5,6 +5,7 @@ import org.example.springapp.exception.ResourceNotFoundException;
 import org.example.springapp.model.Attraction;
 import org.example.springapp.repository.AttractionRepository;
 import org.example.springapp.service.CRUDService;
+import org.example.springapp.utils.enums.ServiceType;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -87,5 +88,8 @@ public class AttractionService implements CRUDService<Attraction> {
     // Поиск по региону
     public List<Attraction> searchAttractionsByRegion(String region) {
         return repository.findByAddressRegion(region);
+    }
+    public List<Attraction> searchAttractionsByService(ServiceType serviceName) {
+        return repository.findByServicesServiceType (serviceName);
     }
 }

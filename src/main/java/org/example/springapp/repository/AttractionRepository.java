@@ -1,6 +1,7 @@
 package org.example.springapp.repository;
 
 import org.example.springapp.model.Attraction;
+import org.example.springapp.utils.enums.ServiceType;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -19,6 +20,6 @@ public interface AttractionRepository extends JpaRepository<Attraction, Long> {
     List<Attraction> findByNameContainingIgnoreCase(String name);
     List<Attraction> findByAddressCity(String city);
 
-    // Поиск по региону
     List<Attraction> findByAddressRegion(String region);
+    List<Attraction> findByServicesServiceType(ServiceType serviceType);
 }
