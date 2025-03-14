@@ -5,7 +5,9 @@ import lombok.AllArgsConstructor;
 import org.example.springapp.dto.ServiceDTO;
 import org.example.springapp.exception.ResourceNotFoundException;
 import org.example.springapp.model.Service;
+import org.example.springapp.service.impl.AttractionService;
 import org.example.springapp.service.impl.ServiceService;
+import org.example.springapp.utils.mapper.EntityByIDMapper;
 import org.example.springapp.utils.mapper.ServiceMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,7 +20,10 @@ import java.util.List;
 @RequestMapping("api/services")
 public class ServiceController {
     private final ServiceService serviceService;
-    private final ServiceMapper ServiceMapper;
+    private final ServiceMapper serviceMapper;
+    private final AttractionService attractionService;
+
+
     @GetMapping("/all")
     public List<Service> readAll() {
         return serviceService.read();
@@ -32,18 +37,24 @@ public class ServiceController {
     }
 
     @PostMapping("/create")
-    public HttpStatus createService(@Valid @RequestBody ServiceDTO ServiceDTO) {
-        var entity = ServiceMapper.toEntity(ServiceDTO);
+    public HttpStatus createService(@Valid @RequestBody ServiceDTO serviceDTO) throws ResourceNotFoundException {
+        var entity = serviceMapper.toEntity(serviceDTO);
+        entity.setAttractions(EntityByIDMapper.fetchByIds(serviceDTO.getAttractionsID(), attractionService, "Attraction"));
         serviceService.create(entity);
         return HttpStatus.CREATED;
     }
 
     @PutMapping("/update")
-    public HttpStatus updateService(@Valid @RequestBody ServiceDTO ServiceDTO) throws ResourceNotFoundException {
-        var entity = ServiceMapper.toEntity(ServiceDTO);
+    public HttpStatus updateService(@Valid @RequestBody ServiceDTO serviceDTO) throws ResourceNotFoundException {
+        var entity = serviceMapper.toEntity(serviceDTO);
+        entity.setAttractions(EntityByIDMapper.fetchByIds(serviceDTO.getAttractionsID(), attractionService, "Attraction"));
+        entity.getAttractions().stream()
+                .peek(x -> System.out.println(x.getName()))
+                .findAny().ifPresent(System.out::println);
         serviceService.update(entity);
         return HttpStatus.OK;
     }
+
     @DeleteMapping("/delete/{id}")
     public HttpStatus deleteService(final @PathVariable(name = "id")
                                     Long ID) throws ResourceNotFoundException {

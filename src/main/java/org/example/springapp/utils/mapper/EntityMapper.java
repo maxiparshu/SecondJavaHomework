@@ -9,7 +9,6 @@ import org.springframework.stereotype.Component;
  * @param <D> дто
  */
 @Component
-public interface Mapper<E, D> {
-    E toEntity(D dto);
-
+public abstract class EntityMapper<E, D> {
+    public abstract E toEntity(D dto);
 }

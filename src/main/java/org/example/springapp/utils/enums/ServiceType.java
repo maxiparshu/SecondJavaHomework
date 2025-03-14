@@ -13,7 +13,6 @@ import java.util.stream.Stream;
  */
 @Getter
 public enum ServiceType {
-
     GUIDE("Гид"),
     CAR_EXCURSION("Aвто_эксурсия"),
     MEALS("Питание");

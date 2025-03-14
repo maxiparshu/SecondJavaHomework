@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
  * Класс для преобразования {@link TicketInfo} и {@link TicketInfoDTO}
  */
 @Component
-public class TicketInfoMapper implements Mapper<TicketInfo, TicketInfoDTO> {
+public class TicketInfoMapper extends EntityMapper<TicketInfo, TicketInfoDTO> {
     @Override
     public TicketInfo toEntity(TicketInfoDTO dto) {
         return TicketInfo.builder()

@@ -1,6 +1,7 @@
 package org.example.springapp.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -15,6 +16,10 @@ import java.math.BigDecimal;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
+@JsonIdentityInfo(
+        generator = ObjectIdGenerators.PropertyGenerator.class,
+        property = "id"
+)
 @Table(name = "ticket_info", schema = "tourism")
 public class TicketInfo {
     @Id
@@ -36,6 +41,5 @@ public class TicketInfo {
      **/
     @OneToOne
     @JoinColumn(name = "attraction_id")
-    @JsonBackReference
     private Attraction attraction;
 }

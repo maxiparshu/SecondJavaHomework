@@ -16,7 +16,7 @@ public class TicketInfoDTO {
     private Long id;
 
     @NotNull(message = "Price cannot be null")
-    @DecimalMin(value = "0.0", inclusive = false, message = "Price must be greater 0")
+    @DecimalMin(value = "0.0", message = "Price must be greater 0 or equal")
     private BigDecimal price;
 
     @NotBlank(message = "Currency cannot be blank")
@@ -27,6 +27,6 @@ public class TicketInfoDTO {
     private Boolean availability;
 
     @NotNull(message = "ID cannot be null")
-    @Positive(message = "ID cannot be positive")
+    @Positive(message = "ID must be positive")
     private Long attractionID;
 }

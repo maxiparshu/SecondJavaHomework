@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
  * Класс для преобразования {@link Service} и {@link ServiceDTO}
  */
 @Component
-public class ServiceMapper implements Mapper<Service, ServiceDTO> {
+public class ServiceMapper extends EntityMapper<Service, ServiceDTO> {
     @Override
     public Service toEntity(ServiceDTO dto) {
         return Service.builder()
