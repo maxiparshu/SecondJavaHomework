@@ -2,7 +2,6 @@ package org.example.springapp.repository;
 
 import org.example.springapp.model.TicketInfo;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
@@ -17,6 +16,6 @@ public interface TicketInfoRepository extends JpaRepository<TicketInfo, Long> {
      *
      * @return {@link Optional} для  {@link TicketInfo}
      */
-    Optional<TicketInfo> getTicketInfoById(@Param("id") Long id);
+    Optional<TicketInfo> getTicketInfoById(Long id);
 
 }

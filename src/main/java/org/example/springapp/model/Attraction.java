@@ -68,7 +68,7 @@ public class Attraction {
             joinColumns = @JoinColumn(name = "attraction_id"),
             inverseJoinColumns = @JoinColumn(name = "service_id")
     )
-    @JsonManagedReference
+    @JsonBackReference
     private List<Service> services;
 
 }

@@ -1,7 +1,6 @@
 package org.example.springapp.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import org.example.springapp.model.Service;
 
@@ -16,6 +15,5 @@ public interface ServiceRepository extends JpaRepository<Service, Long> {
      * Метод для получения {@link Service} по айди
      * @return  {@link Optional} для  {@link Service}
      */
-    Optional<Service> getServiceById(@Param("id") Long id);
-    Optional<Service> getServiceByName(@Param("name") String name);
+    Optional<Service> getServiceById(Long id);
 }

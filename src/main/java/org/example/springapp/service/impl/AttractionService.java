@@ -77,4 +77,15 @@ public class AttractionService implements CRUDService<Attraction> {
         }
         repository.deleteById(id);
     }
+    public List<Attraction> findByNameContaining(String name){
+        return repository.findByNameContainingIgnoreCase(name);
+    }
+    public List<Attraction> searchAttractionsByCity(String city) {
+        return repository.findByAddressCity(city);
+    }
+
+    // Поиск по региону
+    public List<Attraction> searchAttractionsByRegion(String region) {
+        return repository.findByAddressRegion(region);
+    }
 }

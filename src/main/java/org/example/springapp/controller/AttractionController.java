@@ -46,11 +46,17 @@ public class AttractionController {
         return attractionService.read();
     }
 
-    @GetMapping("find/{id}")
+    @GetMapping("/find/{id}")
     public ResponseEntity<Attraction> getById(final @PathVariable(name = "id")
                                               Long ID) throws ResourceNotFoundException {
         return new ResponseEntity<>(attractionService.getByID(ID), HttpStatus.OK);
 
+    }
+
+    @GetMapping("/find/")
+    public ResponseEntity<List<Attraction>> getByName(final @RequestParam(name = "name") String name) {
+
+        return new ResponseEntity<>(attractionService.findByNameContaining(name), HttpStatus.OK);
     }
 
     @PostMapping("/create")
@@ -70,5 +76,15 @@ public class AttractionController {
                                        Long ID) throws ResourceNotFoundException {
         attractionService.delete(ID);
         return HttpStatus.OK;
+    }
+    @GetMapping("/search-by-city/{city}")
+    public List<Attraction> searchAttractionsByCity(final @PathVariable(name = "city") String city) {
+        return attractionService.searchAttractionsByCity(city);
+    }
+
+    // Поиск по региону
+    @GetMapping("/search-by-region/{region}")
+    public List<Attraction> searchAttractionsByRegion(@PathVariable(name = "region") String region) {
+        return attractionService.searchAttractionsByRegion(region);
     }
 }
