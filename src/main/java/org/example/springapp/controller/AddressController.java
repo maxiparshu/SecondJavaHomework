@@ -73,18 +73,18 @@ public class AddressController {
     /**
      * Обновить информацию об адресе.
      *
-     * @param addressDTO DTO с обновленной информацией о адресе.
+     * @param addressDTO DTO с обновленной информацией об адресе.
      * @return HTTP статус OK, если адрес был успешно обновлен.
      * @throws ResourceNotFoundException если связанные сущности не найдены.
      */
     @PutMapping("/update")
     public HttpStatus updateAddress(@Valid @RequestBody AddressDTO addressDTO) throws ResourceNotFoundException {
         var entity = addressMapper.toEntity(addressDTO);
-        entity.setAttraction(EntityByIDMapper.fetchByIds(addressDTO.getAttractionID(), attractionService, "Attraction"));
         if (addressDTO.getAttractionID() != null)
             entity.setAttraction(EntityByIDMapper.fetchByIds(addressDTO.getAttractionID(), attractionService, "Attraction"));
         else
             entity.setAttraction(new ArrayList<>());
+        System.out.println(entity.getAttraction().size());
         addressService.update(entity);
         return HttpStatus.OK;
     }

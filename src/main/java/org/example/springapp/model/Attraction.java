@@ -42,8 +42,6 @@ public class Attraction {
     /**
      * Адрес достопримечательности.
      * Связь "многие к одному" с сущностью Address.
-     * Ленивая загрузка для оптимизации производительности.
-     * Каскадные операции: сохранение и обновление адреса вместе с достопримечательностью.
      */
     @ManyToOne(fetch = FetchType.LAZY,
             cascade = {CascadeType.PERSIST, CascadeType.MERGE})

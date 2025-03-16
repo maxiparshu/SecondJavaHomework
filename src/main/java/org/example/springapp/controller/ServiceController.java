@@ -13,6 +13,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 /**
  * Контроллер для управления сервисами.
@@ -60,7 +61,10 @@ public class ServiceController {
     @PostMapping("/create")
     public HttpStatus createService(@Valid @RequestBody ServiceDTO serviceDTO) throws ResourceNotFoundException {
         var entity = serviceMapper.toEntity(serviceDTO);
-        entity.setAttractions(EntityByIDMapper.fetchByIds(serviceDTO.getAttractionsID(), attractionService, "Attraction"));
+        if (serviceDTO.getAttractionsID() != null)
+            entity.setAttractions(EntityByIDMapper.fetchByIds(serviceDTO.getAttractionsID(), attractionService, "Attraction"));
+        else
+            entity.setAttractions(new ArrayList<>());
         serviceService.create(entity);
         return HttpStatus.CREATED;
     }
@@ -75,10 +79,10 @@ public class ServiceController {
     @PutMapping("/update")
     public HttpStatus updateService(@Valid @RequestBody ServiceDTO serviceDTO) throws ResourceNotFoundException {
         var entity = serviceMapper.toEntity(serviceDTO);
-        entity.setAttractions(EntityByIDMapper.fetchByIds(serviceDTO.getAttractionsID(), attractionService, "Attraction"));
-        entity.getAttractions().stream()
-                .peek(x -> System.out.println(x.getName()))
-                .findAny().ifPresent(System.out::println);
+        if (serviceDTO.getAttractionsID() != null)
+            entity.setAttractions(EntityByIDMapper.fetchByIds(serviceDTO.getAttractionsID(), attractionService, "Attraction"));
+        else
+            entity.setAttractions(new ArrayList<>());
         serviceService.update(entity);
         return HttpStatus.OK;
     }

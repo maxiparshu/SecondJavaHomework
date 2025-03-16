@@ -50,7 +50,7 @@ public class Address {
      * Список достопримечательностей, расположенных по данному адресу.
      * Связь "один ко многим" с сущностью Attraction.
      */
-    @OneToMany(mappedBy = "address")
+    @OneToMany(mappedBy = "address", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Attraction> attraction;
 
 }

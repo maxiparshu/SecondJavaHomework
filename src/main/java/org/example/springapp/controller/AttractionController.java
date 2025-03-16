@@ -50,7 +50,6 @@ public class AttractionController {
             entity.setServices(EntityByIDMapper.fetchByIds(attractionDTO.getServicesID(), serviceService, "Service"));
         else
             entity.setServices(new ArrayList<>());
-        attractionService.update(entity);
         return entity;
     }
 
