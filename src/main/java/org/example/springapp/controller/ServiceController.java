@@ -6,6 +6,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
+import org.example.springapp.aspect.AspectAnnotation;
 import org.example.springapp.dto.ServiceDTO;
 import org.example.springapp.exception.ResourceNotFoundException;
 import org.example.springapp.model.Service;
@@ -58,6 +59,7 @@ public class ServiceController {
             @ApiResponse(responseCode = "404", description = "Услуга не найден")
     })
     @GetMapping("find/{id}")
+    @AspectAnnotation
     public ResponseEntity<Service> getServiceById(final @PathVariable(name = "id") Long ID)
             throws ResourceNotFoundException {
         return new ResponseEntity<>(serviceService.getByID(ID), HttpStatus.OK);
@@ -76,6 +78,7 @@ public class ServiceController {
             @ApiResponse(responseCode = "404", description = "Связанные сущности не найдены")
     })
     @PostMapping("/create")
+    @AspectAnnotation
     public HttpStatus createService(@Valid @RequestBody ServiceDTO serviceDTO) throws ResourceNotFoundException {
         var entity = serviceMapper.toEntity(serviceDTO);
         if (serviceDTO.getAttractionsID() != null)
@@ -99,6 +102,7 @@ public class ServiceController {
             @ApiResponse(responseCode = "404", description = "Услуге или связанные сущности не найдены")
     })
     @PutMapping("/update")
+    @AspectAnnotation
     public HttpStatus updateService(@Valid @RequestBody ServiceDTO serviceDTO) throws ResourceNotFoundException {
         var entity = serviceMapper.toEntity(serviceDTO);
         if (serviceDTO.getAttractionsID() != null)
@@ -122,6 +126,7 @@ public class ServiceController {
             @ApiResponse(responseCode = "404", description = "Сервис не найден")
     })
     @DeleteMapping("/delete/{id}")
+    @AspectAnnotation
     public HttpStatus deleteService(final @PathVariable(name = "id") Long ID)
             throws ResourceNotFoundException {
         serviceService.delete(ID);

@@ -7,6 +7,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
+import org.example.springapp.aspect.AspectAnnotation;
 import org.example.springapp.dto.AttractionDTO;
 import org.example.springapp.exception.ResourceNotFoundException;
 import org.example.springapp.model.Attraction;
@@ -86,6 +87,7 @@ public class AttractionController {
             @ApiResponse(responseCode = "404", description = "Достопримечательность не найдена")
     })
     @GetMapping("/find/{id}")
+    @AspectAnnotation
     public ResponseEntity<Attraction> getById(
             @Parameter(description = "Идентификатор достопримечательности", example = "1")
             @PathVariable(name = "id") Long ID
@@ -105,6 +107,7 @@ public class AttractionController {
             description = "Возвращает список достопримечательностей, название которых содержит заданное значение")
     @ApiResponse(responseCode = "200", description = "Список достопримечательностей успешно получен")
     @GetMapping("/find/")
+    @AspectAnnotation
     public ResponseEntity<List<Attraction>> getByName(
             @Parameter(description = "Часть или полное имя достопримечательности", example = "Tower")
             @RequestParam(name = "name") String name
@@ -126,6 +129,7 @@ public class AttractionController {
             @ApiResponse(responseCode = "404", description = "Связанные сущности не найдены")
     })
     @PostMapping("/create")
+    @AspectAnnotation
     public HttpStatus createAttraction(
             @Parameter(description = "Данные для создания новой достопримечательности")
             @Valid @RequestBody AttractionDTO attractionDTO
@@ -148,6 +152,7 @@ public class AttractionController {
             @ApiResponse(responseCode = "404", description = "Достопримечательность или связанные сущности не найдены")
     })
     @PutMapping("/update")
+    @AspectAnnotation
     public HttpStatus updateAttraction(
             @Parameter(description = "Обновлённые данные достопримечательности")
             @Valid @RequestBody AttractionDTO attractionDTO
@@ -170,6 +175,7 @@ public class AttractionController {
             @ApiResponse(responseCode = "404", description = "Достопримечательность не найдена")
     })
     @DeleteMapping("/delete/{id}")
+    @AspectAnnotation
     public HttpStatus deleteAttraction(
             @Parameter(description = "Идентификатор удаляемой достопримечательности", example = "1")
             @PathVariable(name = "id") Long ID
@@ -187,6 +193,7 @@ public class AttractionController {
     @Operation(summary = "Поиск достопримечательностей по городу")
     @ApiResponse(responseCode = "200", description = "Список достопримечательностей найден")
     @GetMapping("/search-by-city/{city}")
+    @AspectAnnotation
     public List<Attraction> searchAttractionsByCity(final @PathVariable(name = "city") String city) {
         return attractionService.searchAttractionsByCity(city);
     }
@@ -200,6 +207,7 @@ public class AttractionController {
     @Operation(summary = "Поиск достопримечательностей по региону")
     @ApiResponse(responseCode = "200", description = "Список достопримечательностей найден")
     @GetMapping("/search-by-region/{region}")
+    @AspectAnnotation
     public List<Attraction> searchAttractionsByRegion(@PathVariable(name = "region") String region) {
         return attractionService.searchAttractionsByRegion(region);
     }
@@ -213,6 +221,7 @@ public class AttractionController {
     @Operation(summary = "Поиск достопримечательностей по типу услуги")
     @ApiResponse(responseCode = "200", description = "Список достопримечательностей найден")
     @GetMapping("/search-by-service-type/{type}")
+    @AspectAnnotation
     public List<Attraction> searchAttractionsByService(@PathVariable(name = "type") String serviceName) {
         return attractionService.searchAttractionsByService(ServiceType.fromDisplayName(serviceName));
     }

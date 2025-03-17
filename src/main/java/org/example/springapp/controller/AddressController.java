@@ -8,6 +8,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
+import org.example.springapp.aspect.AspectAnnotation;
 import org.example.springapp.dto.AddressDTO;
 import org.example.springapp.exception.ResourceNotFoundException;
 import org.example.springapp.model.Address;
@@ -62,6 +63,7 @@ public class AddressController {
             @ApiResponse(responseCode = "404", description = "Адрес не найден")
     })
     @GetMapping("find/{id}")
+    @AspectAnnotation
     public ResponseEntity<Address> getAddressById(final @PathVariable(name = "id") Long ID)
             throws ResourceNotFoundException {
         return new ResponseEntity<>(addressService.getByID(ID), HttpStatus.OK);
@@ -82,6 +84,7 @@ public class AddressController {
             @ApiResponse(responseCode = "404", description = "Связанные сущности не найдены",
                     content = @Content(mediaType = "application/json"))
     })
+    @AspectAnnotation
     public HttpStatus createAddress(@Valid @RequestBody AddressDTO addressDTO) throws ResourceNotFoundException {
         var entity = addressMapper.toEntity(addressDTO);
         if (addressDTO.getAttractionID() != null)
@@ -106,6 +109,7 @@ public class AddressController {
             @ApiResponse(responseCode = "404", description = "Адрес не найден или связанные сущности не найдены",
                     content = @Content(mediaType = "application/json"))
     })
+    @AspectAnnotation
     public HttpStatus updateAddress(@Valid @RequestBody AddressDTO addressDTO) throws ResourceNotFoundException {
         var entity = addressMapper.toEntity(addressDTO);
         if (addressDTO.getAttractionID() != null)
@@ -130,6 +134,7 @@ public class AddressController {
             @ApiResponse(responseCode = "200", description = "Адрес успешно удален"),
             @ApiResponse(responseCode = "404", description = "Адрес не найден")
     })
+    @AspectAnnotation
     public HttpStatus deleteAddress(final @PathVariable(name = "id") Long ID)
             throws ResourceNotFoundException {
         addressService.delete(ID);

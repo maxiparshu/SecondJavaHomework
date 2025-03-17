@@ -7,6 +7,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
+import org.example.springapp.aspect.AspectAnnotation;
 import org.example.springapp.dto.TicketInfoDTO;
 import org.example.springapp.exception.ResourceNotFoundException;
 import org.example.springapp.model.TicketInfo;
@@ -58,6 +59,7 @@ public class TicketInfoController {
             @ApiResponse(responseCode = "404", description = "Билет с таким ID не найден")
     })
     @GetMapping("find/{id}")
+    @AspectAnnotation
     public ResponseEntity<TicketInfo> getTicketInfoById(
             @Parameter(description = "Идентификатор билета", example = "1")
             @PathVariable(name = "id") Long ID
@@ -79,6 +81,7 @@ public class TicketInfoController {
             @ApiResponse(responseCode = "404", description = "Связанная достопримечательность не найдена")
     })
     @PostMapping("/create")
+    @AspectAnnotation
     public HttpStatus createTicketInfo(
             @Parameter(description = "DTO с данными для создания информации о билете")
             @Valid @RequestBody TicketInfoDTO ticketInfoDTO
@@ -103,6 +106,7 @@ public class TicketInfoController {
             @ApiResponse(responseCode = "404", description = "Билет или связанная достопримечательность не найдены")
     })
     @PutMapping("/update")
+    @AspectAnnotation
     public HttpStatus updateTicketInfo(
             @Parameter(description = "DTO с обновленной информацией о билете")
             @Valid @RequestBody TicketInfoDTO ticketInfoDTO
@@ -126,6 +130,7 @@ public class TicketInfoController {
             @ApiResponse(responseCode = "404", description = "Билет с таким ID не найден")
     })
     @DeleteMapping("/delete/{id}")
+    @AspectAnnotation
     public HttpStatus deleteTicketInfo(
             @Parameter(description = "Идентификатор информации о билете для удаления", example = "1")
             @PathVariable(name = "id") Long ID
