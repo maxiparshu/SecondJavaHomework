@@ -1,0 +1,9 @@
+databaseChangeLog:
+  - include:
+      file: db/changelog/01_create_address.yaml
+  - include:
+      file: db/changelog/02_create_attraction.yaml
+  - include:
+      file: db/changelog/03_create_service.yaml
+  - include:
+      file: db/changelog/04_create_ticket_info.yaml

@@ -1,5 +1,10 @@
 package org.example.springapp.controller;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.example.springapp.dto.TicketInfoDTO;
@@ -21,6 +26,7 @@ import java.util.List;
 @RestController
 @AllArgsConstructor
 @RequestMapping("api/tickets")
+@Tag(name = "TicketInfo Controller", description = "Управление билетами")
 public class TicketInfoController {
 
     private final TicketInfoService ticketInfoService;
@@ -28,10 +34,12 @@ public class TicketInfoController {
     private final TicketInfoMapper ticketInfoMapper;
 
     /**
-     * Получить все информацию о билетах.
+     * Получить всю информацию о билетах.
      *
      * @return Список всех билетов.
      */
+    @Operation(summary = "Получить весь список билетов", description = "Возвращает список всех доступных билетов")
+    @ApiResponse(responseCode = "200", description = "Список билетов успешно получен")
     @GetMapping("/all")
     public List<TicketInfo> readAll() {
         return ticketInfoService.read();
@@ -44,9 +52,16 @@ public class TicketInfoController {
      * @return ResponseEntity с найденной информацией о билете.
      * @throws ResourceNotFoundException если билет с данным ID не найден.
      */
+    @Operation(summary = "Получить информацию о билете по ID", description = "Возвращает информацию о билете по его идентификатору")
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "Информация о билете найдена"),
+            @ApiResponse(responseCode = "404", description = "Билет с таким ID не найден")
+    })
     @GetMapping("find/{id}")
-    public ResponseEntity<TicketInfo> getTicketInfoById(final @PathVariable(name = "id") Long ID)
-            throws ResourceNotFoundException {
+    public ResponseEntity<TicketInfo> getTicketInfoById(
+            @Parameter(description = "Идентификатор билета", example = "1")
+            @PathVariable(name = "id") Long ID
+    ) throws ResourceNotFoundException {
         return new ResponseEntity<>(ticketInfoService.getByID(ID), HttpStatus.OK);
     }
 
@@ -57,8 +72,17 @@ public class TicketInfoController {
      * @return HTTP статус CREATED, если информация о билете успешно создана.
      * @throws ResourceNotFoundException если связанные сущности (например, достопримечательность) не найдены.
      */
+    @Operation(summary = "Создать новую информацию о билете", description = "Создает новую запись о билете для выбранной достопримечательности")
+    @ApiResponses({
+            @ApiResponse(responseCode = "201", description = "Информация о билете успешно создана"),
+            @ApiResponse(responseCode = "400", description = "Некорректные данные"),
+            @ApiResponse(responseCode = "404", description = "Связанная достопримечательность не найдена")
+    })
     @PostMapping("/create")
-    public HttpStatus createTicketInfo(@Valid @RequestBody TicketInfoDTO ticketInfoDTO) throws ResourceNotFoundException {
+    public HttpStatus createTicketInfo(
+            @Parameter(description = "DTO с данными для создания информации о билете")
+            @Valid @RequestBody TicketInfoDTO ticketInfoDTO
+    ) throws ResourceNotFoundException {
         var entity = ticketInfoMapper.toEntity(ticketInfoDTO);
         entity.setAttraction(attractionService.getByID(ticketInfoDTO.getAttractionID()));
         ticketInfoService.create(entity);
@@ -72,8 +96,17 @@ public class TicketInfoController {
      * @return HTTP статус OK, если информация о билете успешно обновлена.
      * @throws ResourceNotFoundException если связанные сущности (например, достопримечательность) не найдены.
      */
+    @Operation(summary = "Обновить информацию о билете", description = "Обновляет существующую информацию о билете")
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "Информация о билете успешно обновлена"),
+            @ApiResponse(responseCode = "400", description = "Некорректные данные"),
+            @ApiResponse(responseCode = "404", description = "Билет или связанная достопримечательность не найдены")
+    })
     @PutMapping("/update")
-    public HttpStatus updateTicketInfo(@Valid @RequestBody TicketInfoDTO ticketInfoDTO) throws ResourceNotFoundException {
+    public HttpStatus updateTicketInfo(
+            @Parameter(description = "DTO с обновленной информацией о билете")
+            @Valid @RequestBody TicketInfoDTO ticketInfoDTO
+    ) throws ResourceNotFoundException {
         var entity = ticketInfoMapper.toEntity(ticketInfoDTO);
         entity.setAttraction(attractionService.getByID(ticketInfoDTO.getAttractionID()));
         ticketInfoService.update(entity);
@@ -87,9 +120,16 @@ public class TicketInfoController {
      * @return HTTP статус OK, если информация о билете успешно удалена.
      * @throws ResourceNotFoundException если информация о билете с данным ID не найдена.
      */
+    @Operation(summary = "Удалить информацию о билете", description = "Удаляет информацию о билете по его ID")
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "Информация о билете успешно удалена"),
+            @ApiResponse(responseCode = "404", description = "Билет с таким ID не найден")
+    })
     @DeleteMapping("/delete/{id}")
-    public HttpStatus deleteTicketInfo(final @PathVariable(name = "id") Long ID)
-            throws ResourceNotFoundException {
+    public HttpStatus deleteTicketInfo(
+            @Parameter(description = "Идентификатор информации о билете для удаления", example = "1")
+            @PathVariable(name = "id") Long ID
+    ) throws ResourceNotFoundException {
         ticketInfoService.delete(ID);
         return HttpStatus.OK;
     }

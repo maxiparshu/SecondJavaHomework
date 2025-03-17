@@ -1,0 +1,48 @@
+databaseChangeLog:
+  - changeSet:
+      id: 3
+      author: user
+      preConditions:
+        - onFail: MARK_RAN # если таблица уже есть, пометит миграцию как выполненную
+        - tableExists:
+            tableName: service
+            schemaName: tourism
+#      changes:
+#        - createTable:
+#            tableName: service
+#            schemaName: tourism
+#            columns:
+#              - column:
+#                  name: id
+#                  type: BIGINT
+#                  autoIncrement: true
+#                  constraints:
+#                    primaryKey: true
+#              - column:
+#                  name: name
+#                  type: VARCHAR(255)
+#              - column:
+#                  name: description
+#                  type: TEXT
+#              - column:
+#                  name: service_type
+#                  type: VARCHAR(50)
+#
+#        - createTable:
+#            tableName: attraction_service
+#            schemaName: tourism
+#            columns:
+#              - column:
+#                  name: attraction_id
+#                  type: BIGINT
+#                  constraints:
+#                    foreignKeyName: fk_attraction_service_attraction
+#                    referencedTableName: attraction
+#                    referencedColumnNames: id
+#              - column:
+#                  name: service_id
+#                  type: BIGINT
+#                  constraints:
+#                    foreignKeyName: fk_attraction_service_service
+#                    referencedTableName: service
+#                    referencedColumnNames: id

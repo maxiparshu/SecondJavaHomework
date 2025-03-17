@@ -1,0 +1,35 @@
+databaseChangeLog:
+  - changeSet:
+      id: 4
+      author: user
+      preConditions:
+        - onFail: MARK_RAN # если таблица уже есть, пометит миграцию как выполненную
+        - tableExists:
+            tableName: ticket_info
+            schemaName: tourism
+#      changes:
+#        - createTable:
+#            tableName: ticket_info
+#            columns:
+#              - column:
+#                  name: id
+#                  type: BIGINT
+#                  autoIncrement: true
+#                  constraints:
+#                    primaryKey: true
+#              - column:
+#                  name: price
+#                  type: DECIMAL(10,2)
+#              - column:
+#                  name: currency
+#                  type: VARCHAR(10)
+#              - column:
+#                  name: availability
+#                  type: BOOLEAN
+#              - column:
+#                  name: attraction_id
+#                  type: BIGINT
+#                  constraints:
+#                    foreignKeyName: fk_ticket_info_attraction
+#                    referencedTableName: attraction
+#                    referencedColumnNames: id
