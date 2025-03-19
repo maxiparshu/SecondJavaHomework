@@ -1,4 +1,16 @@
 databaseChangeLog:
+  - changeSet:
+      id: clear-checksums
+      author: user
+      changes:
+        - sql:
+            sql: DELETE FROM databasechangelog;;
+  - changeSet:
+      id: create-schema
+      author: user
+      changes:
+        - sql:
+            sql: CREATE SCHEMA IF NOT EXISTS tourism;
   - include:
       file: db/changelog/01_create_address.yaml
   - include:
