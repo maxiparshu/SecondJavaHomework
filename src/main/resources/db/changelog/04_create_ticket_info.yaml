@@ -1,7 +1,7 @@
 databaseChangeLog:
   - changeSet:
       id: 4
-      author: user
+      author: postgres
       preConditions:
         - onFail: MARK_RAN
         - not:
@@ -11,6 +11,7 @@ databaseChangeLog:
       changes:
         - createTable:
             tableName: ticket_info
+            schemaName: tourism
             columns:
               - column:
                   name: id
@@ -33,4 +34,5 @@ databaseChangeLog:
                   constraints:
                     foreignKeyName: fk_ticket_info_attraction
                     referencedTableName: attraction
+                    referencedTableSchemaName: tourism
                     referencedColumnNames: id

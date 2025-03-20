@@ -1,7 +1,7 @@
 databaseChangeLog:
   - changeSet:
       id: 3
-      author: user
+      author: postgres
       preConditions:
         - onFail: MARK_RAN # если таблица уже есть, пометит миграцию как выполненную
         - not:
@@ -39,6 +39,7 @@ databaseChangeLog:
                   constraints:
                     foreignKeyName: fk_attraction_service_attraction
                     referencedTableName: attraction
+                    referencedTableSchemaName: tourism
                     referencedColumnNames: id
               - column:
                   name: service_id
@@ -46,4 +47,5 @@ databaseChangeLog:
                   constraints:
                     foreignKeyName: fk_attraction_service_service
                     referencedTableName: service
+                    referencedTableSchemaName: tourism
                     referencedColumnNames: id

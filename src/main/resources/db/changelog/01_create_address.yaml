@@ -1,7 +1,7 @@
 databaseChangeLog:
   - changeSet:
       id: 1
-      author: user
+      author: postgres
       preConditions:
         - onFail: MARK_RAN # если таблица уже есть, пометит миграцию как выполненную
         - not:
