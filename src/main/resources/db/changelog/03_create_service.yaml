@@ -1,0 +1,51 @@
+databaseChangeLog:
+  - changeSet:
+      id: 3
+      author: postgres
+      preConditions:
+        - onFail: MARK_RAN # если таблица уже есть, пометит миграцию как выполненную
+        - not:
+            - sqlCheck:
+                expectedResult: "1"
+                sql: "SELECT COUNT(*) FROM information_schema.tables WHERE table_schema = 'tourism' AND table_name = 'service'"
+      changes:
+        - createTable:
+            tableName: service
+            schemaName: tourism
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: name
+                  type: VARCHAR(255)
+              - column:
+                  name: description
+                  type: TEXT
+              - column:
+                  name: service_type
+                  type: VARCHAR(50)
+
+        - createTable:
+            tableName: attraction_service
+            schemaName: tourism
+            columns:
+              - column:
+                  name: attraction_id
+                  type: BIGINT
+                  constraints:
+                    foreignKeyName: fk_attraction_service_attraction
+                    referencedTableName: attraction
+                    referencedTableSchemaName: tourism
+                    referencedColumnNames: id
+              - column:
+                  name: service_id
+                  type: BIGINT
+                  constraints:
+                    foreignKeyName: fk_attraction_service_service
+                    referencedTableName: service
+                    referencedTableSchemaName: tourism
+                    referencedColumnNames: id
